@@ -64,7 +64,7 @@ namespace ShapeFactory
                 case 2:
                     return new Rectangle(r.Next(1, 10), r.Next(1, 10));
                 case 3:
-                    return new Triangle(r.Next(1, 10), r.Next(1, 10), r.Next(1, 10));
+                    return new Triangle(r.Next(3, 5), r.Next(3, 5), r.Next(3, 5));
                 default:
                     throw new ArgumentException("错误的类型");
             }

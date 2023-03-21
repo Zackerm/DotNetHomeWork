@@ -10,7 +10,7 @@ namespace Shape
     public abstract class Shape
     {
         public abstract int getArea();
-        public abstract bool isLeagle();
+        public abstract bool isLegal();
     }
     public class Rectangle:Shape
     {
@@ -27,7 +27,7 @@ namespace Shape
         {
             return this.width * this.height;
         }
-        public override bool isLeagle()
+        public override bool isLegal()
         {
             if (this.width == this.height || width < 0 || height < 0)
             {
@@ -45,7 +45,7 @@ namespace Shape
         {
             this.height = this.width;
         }
-        public new bool isLeagle()
+        public new bool isLegal()
         {
             if (this.width == this.height && width > 0)
             {
@@ -71,7 +71,7 @@ namespace Shape
             int p = (a + b + c) / 2;
             return Convert.ToInt32(Math.Sqrt(p * (p - a) * (p - b) * (p - c)));
         }
-        public override bool isLeagle()
+        public override bool isLegal()
         {
             if (a + b > c && a - b < c)
             {
@@ -100,7 +100,7 @@ namespace Shape
                 width = Convert.ToInt32(Console.ReadLine());
                 p.setWidth(width);
                 p.setHeight(height);
-                if(!p.isLeagle())
+                if(!p.isLegal())
                 {
                     Console.WriteLine("非法的图形");
                     return;
@@ -114,7 +114,7 @@ namespace Shape
                 width = Convert.ToInt32(Console.ReadLine());
                 s.setWidth(width);
                 s.setHeight();
-                if(!s.isLeagle())
+                if(!s.isLegal())
                 {
                     Console.WriteLine("非法的图形");
                     return;
@@ -129,7 +129,7 @@ namespace Shape
                 b = Convert.ToInt32(Console.ReadLine());
                 c = Convert.ToInt32(Console.ReadLine());
                 t.setLength(a, b, c);
-                if(!t.isLeagle() )
+                if(!t.isLegal() )
                 {
                     Console.WriteLine("非法的图形");
                     return;
