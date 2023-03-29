@@ -67,7 +67,7 @@ namespace OrderSystem
             return "商品名称为" + Name + "商品单价为" + Price+"购买件数为"+Number+"总价为"+Amount;
         }
     }
-    public class OrderServise
+    public class OrderService
     {
         public List<Order> orderlist = new List<Order>();
         public void addOrder(Order order)
@@ -116,40 +116,5 @@ namespace OrderSystem
             orderlist.Sort();
         }
 
-    }
-        
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            OrderServise orderservice = new OrderServise();
-            //初始化订单
-            Order order1 = new Order(00001, "Mike");
-            Order order2 = new Order(00002, "John");
-            Order order3 = new Order(00003, "Danny");
-            Order order4 = new Order(00004, "Chris");
-            order1.addDetails(new OrderDetails("Pen", 3, 9));
-            order1.addDetails(new OrderDetails("Paper", 10, 1));
-            order2.addDetails(new OrderDetails("Clothes", 200, 1));
-            order3.addDetails(new OrderDetails("shoes", 300, 1));
-            order4.addDetails(new OrderDetails("books", 80, 5));
-            Console.WriteLine(order1.ToString());//输出订单1的数据
-            orderservice.addOrder(order1);
-            //orderservice.addOrder(order1);//返回错误信息
-            orderservice.addOrder(order2);
-            orderservice.addOrder(order3);
-            orderservice.addOrder(order4);
-            orderservice.deleteOrder(00003);
-            //orderservice.deleteOrder(00006);//返回错误信息
-            Console.WriteLine("选择查询方式：1.订单id  2.客户姓名");
-            string method = Console.ReadLine();
-            Console.WriteLine("输入查询信息");
-            string infor = Console.ReadLine();
-            List<Order> result = orderservice.searchOrder(infor, method);
-            result.ForEach(t => Console.WriteLine(t.ToString()));//输出查询结果的信息
-            order1.orders.ForEach(t => Console.WriteLine(t.ToString()));
-
-
-        }
     }
 }
