@@ -14,8 +14,8 @@ namespace OrderSystem
     {
         public int Id { get; set; }//订单号
         public string Customer { get; set; }
+        public int Amount { get => orders.Sum(order=>order.totalprice);}
         public List<OrderDetails> orders { get; set; } //储存订单的信息
-        int Amount=> orders.Sum(order=>order.Amount);
         public Order(int id, string Customer)
         {
             this.Id = id; 
@@ -45,7 +45,7 @@ namespace OrderSystem
         public string Name { get; set; }//商品名称
         public int Price { get; set; }//订单金额
         public int Number { get; set; }//商品数量
-        public int Amount =>Price*Number;
+        public int totalprice =>Price*Number;
         public OrderDetails(string name, int price, int number)
         {
             this.Name = name;
@@ -64,7 +64,7 @@ namespace OrderSystem
         }
         public override string ToString()
         {
-            return "商品名称为" + Name + "商品单价为" + Price+"购买件数为"+Number+"总价为"+Amount;
+            return "商品名称为" + Name + "商品单价为" + Price+"购买件数为"+Number+"总价为"+totalprice;
         }
     }
     public class OrderService
@@ -96,17 +96,24 @@ namespace OrderSystem
             }
             orderlist[orderlist.IndexOf(temporder)] = neworder;
         }
-        public List<Order> searchOrder(string infor,string method)
+        public Order searchOrderByID(string infor)
         {
-            if (method == "1")//按id查询
-            {
-                return orderlist.FindAll(order => order.Id == Convert.ToInt64(infor));
+            try
+            { 
+            return orderlist.SingleOrDefault(order => order.Id == Convert.ToInt64(infor));  
             }
-            else if(method == "2")//按客户姓名查询
+            catch
             {
-                return orderlist.FindAll(order => order.Customer == infor);
+                throw new InvalidOperationException("错误的查询");
             }
-            else
+        }
+        public Order searchOrderByName(string infor)
+        {
+            try
+            {
+                return orderlist.SingleOrDefault(order => order.Customer == infor);
+            }
+            catch
             {
                 throw new InvalidOperationException("错误的查询");
             }
@@ -116,5 +123,26 @@ namespace OrderSystem
             orderlist.Sort();
         }
 
+    }
+    public class MainClass
+    {
+        static void Main(string[] args)
+        {
+            OrderService orderservice = new OrderService();
+            //初始化订单
+            Order order1 = new Order(00001, "Mike");
+            Order order2 = new Order(00002, "John");
+            Order order3 = new Order(00003, "Danny");
+            Order order4 = new Order(00004, "Chris");
+            order1.addDetails(new OrderDetails("Pen", 3, 9));
+            order1.addDetails(new OrderDetails("Paper", 10, 1));
+            order2.addDetails(new OrderDetails("Clothes", 200, 1));
+            order3.addDetails(new OrderDetails("shoes", 300, 1));
+            order4.addDetails(new OrderDetails("books", 80, 5));
+            orderservice.addOrder(order1);
+            orderservice.addOrder(order2);
+            orderservice.addOrder(order3);
+            orderservice.addOrder(order4);
+        }
     }
 }

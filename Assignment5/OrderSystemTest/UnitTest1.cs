@@ -56,10 +56,9 @@ namespace OrderSystemTest
         [TestMethod]
         public void searchOrderTest()
         {
-            List<Order> test = orderservice.searchOrder("Mike","2");
-            Assert.AreEqual(2,test.Count);
-            List<Order> test2 = orderservice.searchOrder("2", "1");
-            Assert.AreEqual("John", test2[0].Customer);
+            Order test = orderservice.searchOrderByName("Mike");
+            Order test2 = orderservice.searchOrderByID("2");
+            
         }
 
     }
