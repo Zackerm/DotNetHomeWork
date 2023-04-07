@@ -49,6 +49,8 @@ namespace OrderWindowsForms
             orderservice.addOrder(order2);
             orderservice.addOrder(order3);
             orderservice.addOrder(order4);
+            bindingSource1.DataSource = orderservice.orderlist;
+            //orderservice.orderlist.ForEach(o=>bindingSource2.Add(o.orders));
         }
 
         private void button1_Click(object sender, EventArgs e)

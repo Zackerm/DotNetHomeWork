@@ -23,6 +23,8 @@ namespace OrderWindowsForms
         {
             InitializeComponent();
             this.form1 = form1;
+            bindingSource2.DataSource = form1.orderservice.orderlist;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,6 +42,11 @@ namespace OrderWindowsForms
         {
             Form3 form3 = new Form3(this);
             form3.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            form1.orderservice.searchOrderByID(textBox1.Text).orders.Clear();
         }
     }
 }
